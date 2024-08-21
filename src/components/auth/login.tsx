@@ -2,11 +2,19 @@
 import { Button, Col, Divider, Form, Input, Row } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import Link from 'next/link';
-
+import { signIn } from "next-auth/react"
+import { authenticate } from '@/utils/actions';
 const Login = () => {
 
     const onFinish = async (values: any) => {
+        const { email, password } = values
+        //trigger signin
+        const res = await authenticate(email, password)
+        console.log(res);
+        // const res = await signIn("credentials", { email, password, redirect: false })
+        // if (res?.ok) {
 
+        // }
     };
 
     return (
@@ -31,7 +39,7 @@ const Login = () => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your email!',
+                                    message: 'Please input your email !',
                                 },
                             ]}
                         >
@@ -44,7 +52,7 @@ const Login = () => {
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your password!',
+                                    message: 'Please input your password !',
                                 },
                             ]}
                         >
