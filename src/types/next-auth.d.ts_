@@ -31,4 +31,6 @@ declare module "next-auth" {
         access_expire: number;
         error: string;
     }
+
+
 }
