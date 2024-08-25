@@ -1,20 +1,28 @@
 'use client'
-import { Button, Col, Divider, Form, Input, Row } from 'antd';
+import { Button, Col, Divider, Form, Input, notification, Row } from 'antd';
 import { ArrowLeftOutlined } from '@ant-design/icons';
 import Link from 'next/link';
-import { signIn } from "next-auth/react"
 import { authenticate } from '@/utils/actions';
+import { useRouter } from 'next/navigation';
 const Login = () => {
-
+    const router = useRouter()
     const onFinish = async (values: any) => {
         const { email, password } = values
         //trigger signin
         const res = await authenticate(email, password)
-        console.log(res);
-        // const res = await signIn("credentials", { email, password, redirect: false })
-        // if (res?.ok) {
-
-        // }
+        if (res?.error) {
+            //error
+            notification.error({
+                message: "Error login",
+                description: res?.error
+            })
+            if (res.code === 2) {
+                router.push('/verify')
+            }
+        } else {
+            //redirect to /dashboard
+            router.push('/dashboard')
+        }
     };
 
     return (
