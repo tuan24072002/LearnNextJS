@@ -25,7 +25,6 @@ const Verify = ({ _id }: { _id: string }) => {
             message.success(res.data.message)
             router.push('/auth/login')
         }
-        console.log(res);
     };
     const handleResendCode = () => {
 
@@ -55,7 +54,7 @@ const Verify = ({ _id }: { _id: string }) => {
                             <Input disabled />
                         </Form.Item>
                         <div style={{ color: 'red' }}>
-                            *Mã code đã được gửi tới email đăng ký. Vui lòng kiểm tra email !
+                            * Mã code đã được gửi tới email đăng ký. Vui lòng kiểm tra email !
                         </div>
                         <Divider />
                         <Form.Item
